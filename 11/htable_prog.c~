@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "mylib.h"
+#include "flexarray.h"
+
+int main(void){
+    htable table = htable_new();
+    htable_free(table);
+
+    return EXIT_SUCCESS;
+}

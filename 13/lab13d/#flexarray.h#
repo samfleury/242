@@ -1,0 +1,19 @@
+#ifndef FLEXARRAY_H_
+#define FLEXARRAY_H_
+typedef struct flexarrayrec *flexarray;
+extern
+extern
+extern
+extern
+extern
+void
+void
+flexarray
+void
+void
+flexarray_append(flexarray f, int item);
+flexarray_free(flexarray f);
+flexarray_new();
+flexarray_print(flexarray f);
+flexarray_sort(flexarray f);
+#endif

@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "flexarray.h"
+
+struct flexarrayrec{
+    int capacity;
+    int itemcount;
+    int *items;
+};
+    
+    void *emalloc(size_t s){
+        void *result = malloc(s);
+        if (result == NULL){
+            fprintf(stderr, "mem alloc fail");
+            exit(EXIT_FAILURE);
+        }
+        return result;
+    }
+
+void *erealloc(void *p, size_t s){
+    void *result = realloc(p, s);
+    if (result == NULL){
+        fprintf(stderr, "mem alloc fail");
+        exit(EXIT_FAILURE);
+    }
+    return result;
+}
+
+flexarray flexarray_new(){
+    /* initialise flexarray structure */
+    flexarray f = emalloc(sizeof *f);
+    f->capacity = 2;
+    f->itemcount = 0;
+    f->items = emalloc(f->capacity * sizeof f->items[0]);
+    return f;
+}
+
+void flexarray_append(flexarray f, int num){
+    /* add an item to the flexarray, expanding as necessary */
+    if (f->itemcount == f->capacity){
+        f->capacity *= 2;
+        f->items = erealloc(f->items, f->capacity * sizeof f->items[0]);
+    }
+    f->items[f->itemcount++] = num;
+}
+
+void flexarray_print(flexarray f) {
+    /* a "for" loop to print out each cell of f->items */
+    int i;
+    for (i = 0; i < f->itemcount; i++){
+        printf("%d\n", f->items[i]);
+    }
+}
+void flexarray_sort(flexarray f) {
+    /* sort into ascending order */
+    /* INSERTION SORT
+    *  Starting at the second position, compare each value to everything to its left
+    *  and swap each time until you get to something smaller*/
+    int i, j, key;
+
+    for (i = 1; i < f->itemcount; i++){
+
+        /* print when half sorted */
+        if (i == f->itemcount / 2){
+            for (j = 0; j < f->itemcount; j++){
+                fprintf(stderr, "%d\n", f->items[j]);
+            }
+        }
+        
+        key = f->items[i];
+        j = i - 1;
+
+        while (j >= 0 && f->items[j] > key){
+            f->items[j+1] = f->items[j];
+            j--;
+        }
+        f->items[j+1] = key;
+
+    }
+    
+}
+void flexarray_free(flexarray f){
+    free(f->items);
+    free(f);
+}

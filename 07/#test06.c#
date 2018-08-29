@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define ARRAY_LEN 100
+#define BUFFER_LEN 80
+
+void *emalloc (size_t s){
+    void *result = malloc(s);
+    if (result == NULL){
+        fprintf(stderr, "Can't allocate memory");
+        exit(EXIT_FAILURE);
+    }
+    return result;
+}
+
+void print_big_words(char **words, int count, double average){
+    if (count > 0){
+        if (strlen(words[0] > average)){
+                printf("%s\n", words[0]);
+            }
+            print_big_words(words + 1, count - 1, average);
+    }
+}
+
+int main(){
+    char *words[ARRAY_LEN];
+    char word[BUFFER_LEN];
+}

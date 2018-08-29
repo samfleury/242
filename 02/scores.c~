@@ -1,0 +1,12 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void){
+    double s1;
+    double s2;
+    double s3;
+    int return_code;
+
+    printf("Enter three floating-point numbers: \n");
+    
+}

@@ -1,0 +1,12 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int factorial(int num){
+    
+}
+
+int main(){
+    int num;
+
+while (
+}
